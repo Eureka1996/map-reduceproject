@@ -8,6 +8,7 @@ import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Job;
+import org.apache.hadoop.mapreduce.Partitioner;
 import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 
@@ -16,6 +17,7 @@ import java.io.IOException;
 public class WordCountDriver {
     public static void main(String args[]) throws IOException, ClassNotFoundException, InterruptedException {
 
+        //获取job对象
         Configuration conf = new Configuration();
         Job job = Job.getInstance(conf);
 
@@ -28,6 +30,8 @@ public class WordCountDriver {
 
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
+
+        job.setNumReduceTasks(2);
 
         String inputPathStr = "D:\\wufuqiangbd\\ideaProjects\\map-reduceproject\\mapreduce-processor\\src\\main\\resources\\input\\input1.txt";//args[0];
         String outputPathStr = "D:\\wufuqiangbd\\ideaProjects\\map-reduceproject\\mapreduce-processor\\src\\main\\resources\\output";//args[1];

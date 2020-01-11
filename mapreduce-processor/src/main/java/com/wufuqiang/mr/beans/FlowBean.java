@@ -12,6 +12,7 @@ public class FlowBean implements Writable {
     private long downFlow;
     private long sumFlow;
 
+    //反序列化时，需要反射调用空参构造函数，所以必须有空参构造
     public FlowBean() {
     }
 
@@ -37,12 +38,14 @@ public class FlowBean implements Writable {
         this.downFlow = downFlow;
     }
 
+    //重写序列化方法
     public void write(DataOutput dataOutput) throws IOException {
         dataOutput.writeLong(upFlow);
         dataOutput.writeLong(downFlow);
         dataOutput.writeLong(sumFlow);
     }
 
+    //重写反序列化方法
     public void readFields(DataInput dataInput) throws IOException {
         upFlow = dataInput.readLong();
         downFlow = dataInput.readLong();

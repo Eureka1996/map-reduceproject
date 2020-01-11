@@ -15,10 +15,6 @@ import java.io.IOException;
  **/
 public class WholeFileInputformat extends FileInputFormat<Text,BytesWritable> {
 
-    public WholeFileInputformat() {
-
-    }
-
     public RecordReader<Text, BytesWritable> createRecordReader(InputSplit inputSplit, TaskAttemptContext taskAttemptContext) throws IOException, InterruptedException {
         WholeRecordReader recordReader = new WholeRecordReader();
         recordReader.initialize(inputSplit,taskAttemptContext);

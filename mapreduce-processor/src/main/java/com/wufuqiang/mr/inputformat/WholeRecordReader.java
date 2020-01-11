@@ -23,8 +23,8 @@ public class WholeRecordReader extends RecordReader<Text,BytesWritable> {
 
     FileSplit split;
     Configuration config;
-    Text k ;
-    BytesWritable v ;
+    Text k = new Text();
+    BytesWritable v = new BytesWritable() ;
     boolean isProgress = true;
 
     public void initialize(InputSplit inputSplit, TaskAttemptContext taskAttemptContext) throws IOException, InterruptedException {
@@ -41,7 +41,7 @@ public class WholeRecordReader extends RecordReader<Text,BytesWritable> {
             FSDataInputStream fis = fs.open(path);
             IOUtils.readFully(fis,buf,0,buf.length);
             k.set(path.toString());
-            System.out.println(path.toString());
+            System.out.println("这是Path："+path.toString());
             v.set(buf,0,buf.length);
             IOUtils.closeStream(fis);
             isProgress = false;
