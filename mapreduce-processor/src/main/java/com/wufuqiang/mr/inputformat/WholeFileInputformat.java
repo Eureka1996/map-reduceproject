@@ -15,6 +15,14 @@ import java.io.IOException;
  **/
 public class WholeFileInputformat extends FileInputFormat<Text,BytesWritable> {
 
+    /**
+     * 重写createRecordReader()，创建自定义的RecordReader对象，并初始化
+     * @param inputSplit
+     * @param taskAttemptContext
+     * @return
+     * @throws IOException
+     * @throws InterruptedException
+     */
     public RecordReader<Text, BytesWritable> createRecordReader(InputSplit inputSplit, TaskAttemptContext taskAttemptContext) throws IOException, InterruptedException {
         WholeRecordReader recordReader = new WholeRecordReader();
         recordReader.initialize(inputSplit,taskAttemptContext);

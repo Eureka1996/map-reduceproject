@@ -28,14 +28,16 @@ public class WholeRecordReader extends RecordReader<Text,BytesWritable> {
     boolean isProgress = true;
 
     public void initialize(InputSplit inputSplit, TaskAttemptContext taskAttemptContext) throws IOException, InterruptedException {
+        //将InputSplit转为F
         split = (FileSplit)inputSplit;
         config = taskAttemptContext.getConfiguration();
     }
 
     public boolean nextKeyValue() throws IOException, InterruptedException {
-
+        //核心业务逻辑处理
         if(isProgress){
             byte[] buf = new byte[(int) split.getLength()];
+            //获取fs对象
             Path path = split.getPath();
             FileSystem fs = path.getFileSystem(config);
             FSDataInputStream fis = fs.open(path);
