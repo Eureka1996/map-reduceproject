@@ -1,6 +1,7 @@
 package com.wufuqiang.mr.drivers;
 
 import com.wufuqiang.mr.beans.OrderBean;
+import com.wufuqiang.mr.comparator.OrderGroupingComparator;
 import com.wufuqiang.mr.mappers.OrderMapper;
 import com.wufuqiang.mr.reducers.OrderReducer;
 import org.apache.hadoop.conf.Configuration;
@@ -28,6 +29,8 @@ public class OrderDriver {
         job.setMapOutputValueClass(NullWritable.class);
         job.setOutputKeyClass(OrderBean.class);
         job.setOutputValueClass(NullWritable.class);
+
+        job.setGroupingComparatorClass(OrderGroupingComparator.class);
 
         String inputPathStr = "D:\\wufuqiangbd\\ideaProjects\\map-reduceproject\\mapreduce-processor\\src\\main\\resources\\input\\input1.txt";//args[0];
         String outputPathStr = "D:\\wufuqiangbd\\ideaProjects\\map-reduceproject\\mapreduce-processor\\src\\main\\resources\\output";//args[1];
