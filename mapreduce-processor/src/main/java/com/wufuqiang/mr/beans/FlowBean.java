@@ -1,12 +1,13 @@
 package com.wufuqiang.mr.beans;
 
 import org.apache.hadoop.io.Writable;
+import org.apache.hadoop.io.WritableComparable;
 
 import java.io.DataInput;
 import java.io.DataOutput;
 import java.io.IOException;
 
-public class FlowBean implements Writable {
+public class FlowBean implements WritableComparable<FlowBean> {
 
     private long upFlow;
     private long downFlow;
@@ -57,4 +58,10 @@ public class FlowBean implements Writable {
     public String toString() {
         return upFlow + "\t" + downFlow + "\t" + sumFlow ;
     }
+
+    public int compareTo(FlowBean o) {
+
+        return this.sumFlow>o.sumFlow?-1:1;
+    }
+
 }

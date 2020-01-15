@@ -34,6 +34,7 @@ public class WordCountDriver {
 
         job.setInputFormatClass(CombineTextInputFormat.class);
         CombineTextInputFormat.setMaxInputSplitSize(job,20971520);
+        job.setCombinerClass(WordCountReducer.class);
 
         job.setNumReduceTasks(2);
 
